@@ -1,0 +1,5 @@
+INFO:werkzeug: * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [29/Sep/2015 20:37:17] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [29/Sep/2015 20:37:17] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [29/Sep/2015 20:37:17] "GET /favicon.ico HTTP/1.1" 404 -
