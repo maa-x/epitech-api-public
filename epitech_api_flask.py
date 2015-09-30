@@ -58,7 +58,7 @@ def planning():
             log_file("Intra replied in %s seconds" %r.elapsed)
         if len(r.text) < 2:
             return (json.dumps({"error":{"message":"Epitech API returned an empty response", "code":500}})), 500
-        planning = json.loads(clean_json(r.text))
+        planning = json.loads(r.text)
         filtered_planning = get_classes_by_status(planning, get)
         return json.dumps(filtered_planning)
     except Exception as e:
