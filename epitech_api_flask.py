@@ -131,7 +131,7 @@ def projects():
         r = session.post(server_url+"/module/board/?format=json&start=%s&end=%s" % (start, end),verify=ssl_verify)
         if r.status_code == 403:
             return json.dumps({"error": {"message": "Connection token is invalid or has expired", 'code':403}}), 403
-        projects = json.loads(clean_json(r.text))
+        projects = json.loads(r.text)
         projects = filter_projects(projects, get)
         return json.dumps(projects)
     except Exception as e:
