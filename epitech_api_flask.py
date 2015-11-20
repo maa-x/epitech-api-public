@@ -34,7 +34,7 @@ def infos():
         r = session.post(server_url+"/?format=json", verify=ssl_verify)
         if r.status_code == 403:
             return json.dumps({"error": {"message": "Connection token is invalid or has expired", 'code':403}}), 403
-        return clean_json(r.text)
+        return r.text
     except Exception as e:
         return json.dumps({"error": {"message": "Server was unable to connect through Epitech API", "code": 500}}), 500
 
