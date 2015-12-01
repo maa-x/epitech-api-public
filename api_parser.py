@@ -7,7 +7,7 @@ def log_file(msg, code=0):
         f.close()
 
 def clean_json(json_raw):
-    return json_raw[31:]
+    return json_raw
 
 def epur(json_raw):
     return json_raw.replace("\t", "").replace("\n", "")

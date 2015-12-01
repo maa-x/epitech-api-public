@@ -36,6 +36,7 @@ def infos():
             return json.dumps({"error": {"message": "Connection token is invalid or has expired", 'code':403}}), 403
         return r.text
     except Exception as e:
+        print(e)
         return json.dumps({"error": {"message": "Server was unable to connect through Epitech API", "code": 500}}), 500
 
 @app.route('/planning', methods=['POST', 'GET'])
