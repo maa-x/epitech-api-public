@@ -22,7 +22,13 @@ def log_user_with_login(params, session):
 def log_and_check_params(mandatory_params, request):
     error = {}
     session = requests.Session()
-    params = get_parameters(request.method, request)
+    params = {}
+    if request.get_json() and len(request.get_json()) > 0:
+        params = request.get_json()
+    elif request.form and len(request.form) != 0:
+        params = request.form
+    elif request.args and len(request.args) != 0:
+        params = request.args
     for param in mandatory_params:
         if param not in params.keys():
             error = {"error": {"code": 400, "message": "Missing parameter : %s" %param}}
