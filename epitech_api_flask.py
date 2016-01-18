@@ -197,7 +197,11 @@ def modules():
     if error != {}:
         return json.dumps(error), error['error']['code']
     try:
-        r = session.get(server_url+"/user/#!/netsoul", verify=ssl_verify)
+        if 'user' in params:
+            route = server_url+"/user/%s/notes" % params['user']
+        else:
+            route = server_url+"/user/#!/netsoul"
+        r = session.get(route, verify=ssl_verify)
         if r.status_code == 403:
             return json.dumps({"error": {"message": "Connection token is invalid or has expired", 'code':403}}), 403
         return get_modules(r.text)
