@@ -197,8 +197,8 @@ def modules():
     if error != {}:
         return json.dumps(error), error['error']['code']
     try:
-        if 'user' in params:
-            route = server_url+"/user/%s/notes" % params['user']
+        if 'login' in params:
+            route = server_url+"/user/%s/notes" % params['login']
         else:
             route = server_url+"/user/#!/netsoul"
         r = session.get(route, verify=ssl_verify)
