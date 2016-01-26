@@ -73,8 +73,8 @@ def get_parameters(method, request):
 def get_marks(html_raw):
     pos = html_raw.find('notes: [')
     pos2 = html_raw.find('});', pos)
-    output = html_raw[pos:pos2 + 1]
-    return "{"+output
+    output = html_raw[pos + 7:pos2]
+    return output
 
 def get_modules(html_raw):
     haystack = "window.user = $.extend(window.user || {}, {"
