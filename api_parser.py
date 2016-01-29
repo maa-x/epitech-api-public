@@ -76,4 +76,4 @@ def get_modules(html_raw):
     haystack = "window.user = $.extend(window.user || {}, {"
     pos = html_raw.find(haystack)
     pos2 = html_raw.find("notes: [")
-    return "{"+html_raw[pos+len(haystack):pos2 -4]+"}"
+    return html_raw[pos+len(haystack)+11:pos2 -4]
