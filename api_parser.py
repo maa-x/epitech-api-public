@@ -29,19 +29,15 @@ def get_classes_by_status(planning, status):
     for _filter in filters:
         if _filter not in ["registered", "free"]:
             return {"error":{"message":"Invalid filter : %s" % _filter, "code":400}}
-        for item in output:
-            if _filter == "registered":
-                if hasattr(item, "keys"):
-                    if "event_registered" not in item.keys() or item['event_registered'] == 'null' or item['event_registered'] is None:
-                        output.pop(output.index(item))
-            elif _filter == "free":
-                if hasattr(item, "keys"):
-                    if "registered" not in item.keys() or "nb_place" not in item.keys():
-                        output.pop(output.index(item))
-                    elif item["nb_place"] <= item["registered"]:
-                        output.pop(output.index(item))
-            else:
-                return {"error":{"message":"Invalid filter : %s" % _filter, "code":400}}
+        if _filter == "registered":
+            output = [item for item in output if "event_registered" in item.keys() \
+            and item['event_registered'] is not None \
+            and item['event_registered'] == "registered"]
+        elif _filter == "free":
+            output = [item for item in output if "room" in item.keys() \
+            and item["room"] is not None and "seats" in item["room"].keys() \
+            and "total_students_registered" in item.keys() \
+            and item["room"]["seats"] > item["total_students_registered"]]
     return output
 
 def filter_projects(planning, filters):
@@ -73,8 +69,8 @@ def get_parameters(method, request):
 def get_marks(html_raw):
     pos = html_raw.find('notes: [')
     pos2 = html_raw.find('});', pos)
-    output = html_raw[pos:pos2 + 1]
-    return "{"+output
+    output = html_raw[pos + 7:pos2]
+    return output
 
 def get_modules(html_raw):
     haystack = "window.user = $.extend(window.user || {}, {"
